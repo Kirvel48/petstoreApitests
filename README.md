@@ -28,12 +28,12 @@
 ---
 ## Запуск web-тестов из терминала
 Команда для запуска тестов локально: 
-```
+```agsl
 gradle clean test
 ```
-Команда для запуска тестов удаленно в Selenoid:
+Команда для запуска тестов удаленно через Jenkins:
 ```agsl
-gradle clean test -Dselenoid_url="selenoid.autotests.cloud/wd/hub" -Dbrowser_size="1920х1080" -Dbrowser="chrome"
+clean ${TASK}
 ```
 
 ## Сборка в [Jenkins](https://jenkins.autotests.cloud/job/wikiTests/)
