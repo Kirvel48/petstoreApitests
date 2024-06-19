@@ -6,6 +6,7 @@
 - Сборка в Jenkins
 - Пример Allure-отчета
 - Уведомления в Telegram
+- Интеграция с Allure TestOps
 
 --- 
 
@@ -49,6 +50,10 @@ clean ${TASK}
 <img src=images/AllureSteps.jpg>
 
 ---
+
+## Интеграция с Allure TestOps
+<img src=images/testOpsPet.jpg>
+<img src=images/testOpsPet2.jpg>
 
 ## Уведомления в Telegram
 Информация о результатах проходжения тестов поступает в Telegram через специального бота
