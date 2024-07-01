@@ -1,13 +1,13 @@
 package api;
 
-import data.TestsData;
 import models.CreateOrderModel;
 import models.LoginTestsResponseModel;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static spec.Spec.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class ApiTests {
 
@@ -40,8 +40,8 @@ public class ApiTests {
                         .extract().as(CreateOrderModel.class));
 
         step("Проверка ответа", () -> {
-            assertEquals(petId, response.getPetId());
-            assertEquals(id, response.getId());
+            assertThat(response.getPetId()).isEqualTo(petId);
+            assertThat(response.getId()).isEqualTo(id);
         });
 
     }
@@ -56,8 +56,8 @@ public class ApiTests {
                         .extract().as(LoginTestsResponseModel.class));
 
         step("Проверка ответа", () -> {
-            assertEquals("Order not found", response.getMessage());
-            assertEquals("error", response.getType());
+            assertThat(response.getMessage()).isEqualTo("Order not found");
+            assertThat(response.getType()).isEqualTo("error");
         });
     }
 }

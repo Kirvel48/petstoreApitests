@@ -11,18 +11,18 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static spec.Spec.requestSpec;
 import static spec.Spec.responseSpec;
 
 @DisplayName("Тесты оформления заказов в магазине")
 @Tag("Store")
+@Owner("Тётушкин К.И.")
 public class StoreTests extends TestBase {
     TestsData testsData = new TestsData();
 
     @Test
     @DisplayName("Создание заказа")
-    @Owner("Тётушкин К.И.")
     void createOrderTest() {
         CreateOrderModel createOrderModel = new CreateOrderModel();
         createOrderModel.setId(testsData.id);
@@ -40,16 +40,15 @@ public class StoreTests extends TestBase {
                 .spec(responseSpec)
                 .extract().as(CreateOrderModel.class));
         step("Проверка параметров в созданном заказе", () -> {
-            assertEquals(testsData.id, response.getId());
-            assertEquals(testsData.petId, response.getPetId());
-            assertEquals(testsData.quantity, response.getQuantity());
-            assertEquals(testsData.complete, response.isComplete());
+            assertThat(response.getId()).isEqualTo(testsData.id);
+            assertThat(response.getPetId()).isEqualTo(testsData.petId);
+            assertThat(response.getQuantity()).isEqualTo(testsData.quantity);
+            assertThat(response.isComplete()).isEqualTo(testsData.complete);
         });
     }
 
     @Test
     @DisplayName("Получение информации о заказе")
-    @Owner("Тётушкин К.И.")
     void checkCreateOrderTest() {
         step("Создание заказа", () -> ApiTests.createOrder(testsData.id, testsData.petId, testsData.quantity, testsData.shipDate, testsData.status, testsData.complete));
         CreateOrderModel response = step("Отправка запроса информации о заказе", () ->
@@ -59,12 +58,11 @@ public class StoreTests extends TestBase {
                         .then()
                         .spec(responseSpec)
                         .extract().as(CreateOrderModel.class));
-        step("Проверка информации о заказе", () -> assertEquals(testsData.petId, response.getPetId()));
+        step("Проверка информации о заказе", () -> assertThat(response.getPetId()).isEqualTo(testsData.petId));
     }
 
     @Test
     @DisplayName("Удаление заказа")
-    @Owner("Тётушкин К.И.")
     void deleteOrderTest() {
         step("Создание заказа", () -> ApiTests.createOrder(testsData.id, testsData.petId, testsData.quantity, testsData.shipDate, testsData.status, testsData.complete));
         step("Проверка заказа", () -> ApiTests.checkOrder(testsData.id, testsData.petId));
