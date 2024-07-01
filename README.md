@@ -37,13 +37,13 @@ gradle clean test
 clean ${TASK}
 ```
 
-## Сборка в [Jenkins](https://jenkins.autotests.cloud/job/wikiTests/)
+## Сборка в [Jenkins](https://jenkins.autotests.cloud/job/petstore-apitests/)
 Для запуска необходимо перейти в Build with Parameters и нажать Build.
 <img src=images/Jenkins.jpg>
 
 ---
 
-## Пример Allure-отчета
+## Пример [Allure-отчета](https://jenkins.autotests.cloud/job/petstore-apitests/allure/)
 Основная страница отчета:
 <img src=images/AllureStart.jpg>
 Страница с шагами и подробной информацией о результате каждого кейса
@@ -51,7 +51,7 @@ clean ${TASK}
 
 ---
 
-## Интеграция с Allure TestOps
+## Интеграция с [Allure TestOps](https://allure.autotests.cloud/project/4272/dashboards)
 <img src=images/testOpsPet.jpg>
 <img src=images/testOpsPet2.jpg>
 
