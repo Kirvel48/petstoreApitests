@@ -19,10 +19,11 @@ ____
 
 * <a href="#allure">Allure отчет</a>
 
+* <a href="#allure-testops">Интеграция с Allure TestOps</a>
+
 * <a href="#jira">Интеграция с Jira</a>
 
 * <a href="#telegram">Уведомление в Telegram при помощи бота</a>
-
 ____
 
 <a id="tools"></a>
@@ -88,25 +89,38 @@ clean test
 
 ___
 <a id="allure"></a>
-## <a name="Allure"></a>Allure [отчет](https://jenkins.autotests.cloud)</a>
+## <a name="Allure"></a>Allure [отчет](https://jenkins.autotests.cloud/job/petstoreApitests/)</a>
 ___
 
 ### *Основная страница отчёта*
 
 <p align="center">  
-<img title="Allure Overview Dashboard" src="images/screen/allure-dashboard.png" width="850">  
+<img title="Allure Overview Dashboard" src="images/AllureMain.jpg" width="850">  
 </p>  
 
 ### *Тест-кейсы*
 
 <p align="center">  
-<img title="Allure Tests" src="images/screen/allure-test-cases.png" width="850">  
+<img title="Allure Tests" src="images/AllureTests.jpg" width="850">  
 </p>
 
 ### *Графики*
 
   <p align="center">  
-<img title="Allure Graphics" src="images/screen/allure-report-graphs.png" width="850">
+<img title="Allure Graphics" src="images/AllureGraghs.jpg" width="850">
 
-<img title="Allure Graphics" src="images/screen/allure-report-graphs2.png" width="850">  
+___
+<a id="allure-testops"></a>
+## Интеграция с <a target="_blank" href="https://allure.autotests.cloud/launch/46538">Allure TestOps</a>
+____
+### *Allure TestOps Dashboard*
+
+<p align="center">  
+<img title="Allure TestOps Dashboard" src="images/TestopsMain.jpg" width="850">  
+</p>  
+
+### *Авто тест-кейсы*
+
+<p align="center">  
+<img title="Allure TestOps Tests" src="images/TestopsTests.jpg" width="850">  
 </p>
