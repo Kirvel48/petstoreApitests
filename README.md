@@ -122,5 +122,5 @@ ____
 ### *Авто тест-кейсы*
 
 <p align="center">  
-<img title="Allure TestOps Tests" src="images/TestopsTests.jpg" width="850">  
+<img title="Allure TestOps Tests" src="images/testopsTests.jpg" width="850">  
 </p>
