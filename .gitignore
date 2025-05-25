@@ -1,13 +1,12 @@
 HELP.md
+allure-results/
+
 build/
 !**/src/main/**
 !**/src/test/**
 
 ### IntelliJ IDEA ###
-.idea/
-.idea/misc.xml
-.idea/workspase.xml
-
+.idea
 *.iws
 *.iml
 *.ipr
@@ -20,4 +19,3 @@ gradlew
 gradlew.bat
 ### Logs ###
 *.log
-allure-results
