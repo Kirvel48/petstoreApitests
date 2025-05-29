@@ -21,8 +21,6 @@ ____
 
 * <a href="#allure-testops">Интеграция с Allure TestOps</a>
 
-* <a href="#jira">Интеграция с Jira</a>
-
 * <a href="#telegram">Уведомление в Telegram при помощи бота</a>
 ____
 
@@ -123,4 +121,12 @@ ____
 
 <p align="center">  
 <img title="Allure TestOps Tests" src="images/testopsTests.jpg" width="850">  
+</p>
+
+____
+<a id="telegram"></a>
+## Уведомление в Telegram при помощи бота
+____
+<p align="center">  
+<img title="Telegram" src="images/Telegram.jpg" width="550">  
 </p>
