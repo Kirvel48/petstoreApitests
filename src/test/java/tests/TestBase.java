@@ -5,10 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
     @BeforeAll
-    public static void beforeAll() {
+    public static void setURL() {
         RestAssured.baseURI = "https://petstore.swagger.io";
-        RestAssured.basePath="/v2";
-
-
+        RestAssured.basePath = "/v2";
     }
 }
