@@ -8,5 +8,7 @@ public class TestBase {
     public static void setURL() {
         RestAssured.baseURI = "https://petstore.swagger.io";
         RestAssured.basePath = "/v2";
+
     }
+
 }

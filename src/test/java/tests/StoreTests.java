@@ -1,78 +1,70 @@
 package tests;
 
-import api.ApiTests;
-import data.TestsData;
+import api.OrderApi;
 import io.qameta.allure.Owner;
 import models.CreateOrderModel;
 import models.LoginTestsResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import utils.OrderTestDataFactory;
+
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static spec.Spec.requestSpec;
-import static spec.Spec.responseSpec;
+import static spec.Specs.*;
 
 @DisplayName("Тесты оформления заказов в магазине")
 @Tag("Store")
 @Owner("Тётушкин К.И.")
 public class StoreTests extends TestBase {
-    TestsData testsData = new TestsData();
+    CreateOrderModel orderModel = OrderTestDataFactory.orderModel();
 
     @Test
     @DisplayName("Создание заказа")
     void createOrderTest() {
-        CreateOrderModel createOrderModel = new CreateOrderModel();
-        createOrderModel.setId(testsData.id);
-        createOrderModel.setPetId(testsData.petId);
-        createOrderModel.setStatus(testsData.status);
-        createOrderModel.setComplete(testsData.complete);
-        createOrderModel.setQuantity(testsData.quantity);
-        createOrderModel.setShipDate(testsData.shipDate);
 
-        CreateOrderModel response = step("Отправка запроса на создание", () -> given(requestSpec)
-                .when()
-                .body(createOrderModel)
-                .post("store/order")
-                .then()
-                .spec(responseSpec)
-                .extract().as(CreateOrderModel.class));
+        CreateOrderModel response = step("Создание заказе", () ->
+                OrderApi.createOrder(orderModel));
         step("Проверка параметров в созданном заказе", () -> {
-            assertThat(response.getId()).isEqualTo(testsData.id);
-            assertThat(response.getPetId()).isEqualTo(testsData.petId);
-            assertThat(response.getQuantity()).isEqualTo(testsData.quantity);
-            assertThat(response.isComplete()).isEqualTo(testsData.complete);
+            assertThat(response.getId()).isEqualTo(orderModel.getId());
+            assertThat(response.getPetId()).isEqualTo(orderModel.getPetId());
+            assertThat(response.getQuantity()).isEqualTo(orderModel.getQuantity());
+            assertThat(response.isComplete()).isEqualTo(orderModel.isComplete());
         });
     }
 
     @Test
     @DisplayName("Получение информации о заказе")
     void checkCreateOrderTest() {
-        step("Создание заказа", () -> ApiTests.createOrder(testsData.id, testsData.petId, testsData.quantity, testsData.shipDate, testsData.status, testsData.complete));
+        step("Создание заказа", () -> OrderApi.createOrder(orderModel));
         CreateOrderModel response = step("Отправка запроса информации о заказе", () ->
                 given(requestSpec)
                         .when()
-                        .get("store/order/" + testsData.id)
+                        .get("store/order/" + orderModel.getId())
                         .then()
-                        .spec(responseSpec)
+                        .spec(responseSpec200)
                         .extract().as(CreateOrderModel.class));
-        step("Проверка информации о заказе", () -> assertThat(response.getPetId()).isEqualTo(testsData.petId));
+        step("Проверка информации о заказе", () -> {
+            assertThat(response.getId()).isEqualTo(orderModel.getId());
+            assertThat(response.getStatus()).isEqualTo(orderModel.getStatus());
+            assertThat(response.isComplete()).isEqualTo(orderModel.isComplete());
+        });
     }
 
     @Test
     @DisplayName("Удаление заказа")
     void deleteOrderTest() {
-        step("Создание заказа", () -> ApiTests.createOrder(testsData.id, testsData.petId, testsData.quantity, testsData.shipDate, testsData.status, testsData.complete));
-        step("Проверка заказа", () -> ApiTests.checkOrder(testsData.id, testsData.petId));
+        step("Создание заказа", () -> OrderApi.createOrder(orderModel));
+        step("Проверка заказа", () -> OrderApi.checkOrder(orderModel.getId()));
         step("Удаление заказа", () -> given(requestSpec)
                 .when()
-                .delete("store/order/" + testsData.id)
+                .delete("store/order/" + orderModel.getId())
                 .then()
-                .spec(responseSpec)
+                .spec(responseSpec200)
                 .extract().as(LoginTestsResponseModel.class));
-        step("Заказ удален", () -> ApiTests.checkDeleteOrder(testsData.id));
+        step("Заказ удален", () -> OrderApi.checkDeleteOrder(orderModel.getId()));
     }
 
 }

@@ -4,6 +4,12 @@ import lombok.Data;
 
 @Data
 public class UserInfoTestResponseModel {
-    String username, firstName, lastName, email, password, phone;
-    int id, userStatus;
+    String username;
+    String firstName;
+    String lastName;
+    String email;
+    String password;
+    String phone;
+    int id;
+    int userStatus;
 }

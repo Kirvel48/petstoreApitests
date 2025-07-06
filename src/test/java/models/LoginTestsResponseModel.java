@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class LoginTestsResponseModel {
-    String type, message;
+    String type;
+    String message;
     int code;
 }

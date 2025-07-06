@@ -5,42 +5,34 @@ import models.LoginTestsResponseModel;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static spec.Spec.*;
+import static spec.Specs.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class ApiTests {
+public class OrderApi {
 
 
-    public static void createOrder(int id, int petId, int quantity, String shipDate, String status, boolean complete) {
-        CreateOrderModel createOrderModel = new CreateOrderModel();
-        createOrderModel.setId(id);
-        createOrderModel.setPetId(petId);
-        createOrderModel.setStatus(status);
-        createOrderModel.setComplete(complete);
-        createOrderModel.setQuantity(quantity);
-        createOrderModel.setShipDate(shipDate);
-
-        given(requestSpec)
-                .when()
-                .body(createOrderModel)
-                .post("store/order")
-                .then()
-                .spec(responseSpec)
-                .extract().as(CreateOrderModel.class);
+    public static CreateOrderModel createOrder(CreateOrderModel orderModel) {
+        return step("Создание заказа", () ->
+                given(requestSpec)
+                        .when()
+                        .body(orderModel)
+                        .post("store/order")
+                        .then()
+                        .spec(responseSpec200)
+                        .extract().as(CreateOrderModel.class));
     }
 
-    public static void checkOrder(int id, int petId) {
+    public static void checkOrder(int id) {
         CreateOrderModel response = step("Отправка запроса", () ->
                 given(requestSpec)
                         .when()
                         .get("store/order/" + id)
                         .then()
-                        .spec(responseSpec)
+                        .spec(responseSpec200)
                         .extract().as(CreateOrderModel.class));
 
         step("Проверка ответа", () -> {
-            assertThat(response.getPetId()).isEqualTo(petId);
             assertThat(response.getId()).isEqualTo(id);
         });
 
@@ -52,7 +44,7 @@ public class ApiTests {
                         .when()
                         .get("store/order/" + id)
                         .then()
-                        .spec(responseError404Spec)
+                        .spec(responseSpec404)
                         .extract().as(LoginTestsResponseModel.class));
 
         step("Проверка ответа", () -> {

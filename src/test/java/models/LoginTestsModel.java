@@ -1,12 +1,20 @@
 package models;
 
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class LoginTestsModel {
-    String username, firstName, lastName, email, password, phone;
-    int id, userStatus;
+    String username;
+    String firstName;
+    String lastName;
+    String email;
+    String password;
+    String phone;
+    int id;
+    int userStatus;
 }
 
